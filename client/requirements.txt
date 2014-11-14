@@ -1,0 +1,6 @@
+#Web service Client
+httplib2
+
+#Testing
+nose
+mock
