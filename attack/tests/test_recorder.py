@@ -31,3 +31,8 @@ class TestRecorder(TestCase):
         self.attack_recorder.get_geo_data()
         self.attack_recorder.stamp_time()
         saved_attack = self.attack_recorder.save()
+        self.assertEqual(saved_attack.service_name, 'company web server')
+        self.assertEqual(saved_attack.country_code, 'US')
+
+    def test_set_data_with_empty_values(self):
+        self.assertRaisesMessage(ValueError, 'Required attacker_ip, service_name, protocol and port.', self.attack_recorder.set_data)
