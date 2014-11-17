@@ -15,4 +15,6 @@ def add_attack(request):
         print err
         return HttpResponseBadRequest(err)
 
-    return HttpResponse('Added')
+    attack_recorder.stamp_time()
+    attack = attack_recorder.save()
+    return HttpResponse('Added attack')
