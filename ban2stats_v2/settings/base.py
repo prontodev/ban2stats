@@ -86,7 +86,6 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-print 'Base dir = ', BASE_DIR
 #GEO IP Settings
 GEOIP_PATH = os.path.join(BASE_DIR, '../geo_data')
 
