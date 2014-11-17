@@ -25,7 +25,7 @@ class AttackRecorder(object):
         if self.geo_details is None:
             raise ValueError("Cannot find Geo details for this IP {0}".format(ip))
 
-        self.data['country'] = self.geo_details['country_code']
+        self.data['country_code'] = self.geo_details['country_code']
         self.data['country_name'] = self.geo_details['country_name']
         self.data['latitude'] = unicode(self.geo_details['latitude'])
         self.data['longitude'] = unicode(self.geo_details['longitude'])
@@ -37,3 +37,10 @@ class AttackRecorder(object):
     def stamp_time(self):
         now_timestamp = datetime.now(tz=get_current_timezone())
         self.data['timestamp'] = now_timestamp
+
+    def save(self):
+        self.data.pop('country_name')
+        print self.data
+        attack = Attack(**self.data)
+        attack.save()
+        return attack
