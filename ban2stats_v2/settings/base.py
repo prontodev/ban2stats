@@ -85,3 +85,9 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.7/howto/static-files/
 
 STATIC_URL = '/static/'
+
+try:
+    from local import *
+except ImportError, e:
+    if str(e) != 'No module named local':
+        raise e

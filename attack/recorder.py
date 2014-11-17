@@ -1,0 +1,3 @@
+
+class AttackRecorder(object):
+    pass
