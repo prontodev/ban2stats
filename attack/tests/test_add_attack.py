@@ -20,3 +20,11 @@ class TestAttackAdd(TestCase):
         self.assertEqual(response.status_code, 400)
         self.assertEqual(response.content, 'Cannot find Geo details for this IP 127.8.8.8')
         self.assertRaises(ObjectDoesNotExist, Attack.objects.get, attacker_ip='127.8.8.8', port='81')
+
+    def test_add_fail__missing_parameter(self):
+        fail2ban_data = dict()
+        response = self.client.post('/attack/new/', data=fail2ban_data, **self.request_headers)
+
+        self.assertEqual(response.status_code, 400)
+        self.assertEqual(response.content, 'Required attacker_ip, service_name, protocol and port.')
+        self.assertRaises(ObjectDoesNotExist, Attack.objects.get, attacker_ip='72.14.207.99', port='81')
