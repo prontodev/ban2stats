@@ -40,7 +40,6 @@ class AttackRecorder(object):
 
     def save(self):
         self.data.pop('country_name')
-        print self.data
         attack = Attack(**self.data)
         attack.save()
         return attack
