@@ -17,3 +17,7 @@ class TestRecorder(TestCase):
         ip = '127.8.8.8'
         self.assertRaisesMessage(ValueError, 'Cannot find Geo details for this IP 127.8.8.8',
                                  self.attack_recorder.get_geo_data, ip=ip )
+
+    def test_stamp_time(self):
+        self.attack_recorder.stamp_time()
+        self.assertTrue(self.attack_recorder.data['timestamp'])

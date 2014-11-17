@@ -33,3 +33,7 @@ class AttackRecorder(object):
         region = self.geo_details.get('region') or self.geo_details.get('city') or 'n/a'
         country_name = self.geo_details.get('country_name', 'n/a')
         self.data['geo_location'] = ', '.join([region, country_name])
+
+    def stamp_time(self):
+        now_timestamp = datetime.now(tz=get_current_timezone())
+        self.data['timestamp'] = now_timestamp
