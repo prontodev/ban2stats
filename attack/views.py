@@ -1,7 +1,9 @@
 from django.http.response import HttpResponse, HttpResponseBadRequest
 from attack.recorder import AttackRecorder
+from ban2stats_v2.decorators import token_required
 
 
+@token_required
 def add_attack(request):
     attack_recorder = AttackRecorder()
     try:
