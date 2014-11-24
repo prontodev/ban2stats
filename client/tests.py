@@ -13,7 +13,7 @@ class ClientTest(TestCase):
 
     def test_api_headers(self):
         handler = BAN2STATSHandler()
-        self.assertEqual(handler.api_headers()['Token'], 'Banana')
+        self.assertEqual(handler.api_headers()['Token'], 'oTbCmV71i2Lg5wQMSsPEFKGJ0Banana')
 
     @mock.patch('httplib2.Http.request')
     def test_call_webservice_api(self, mock_http):
