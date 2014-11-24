@@ -1,6 +1,6 @@
 from django.test import TestCase
 from django.http.request import HttpRequest
-from ban2stats_v2.decorators import token_required
+from ban2stats.decorators import token_required
 
 
 
