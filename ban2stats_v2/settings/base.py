@@ -49,9 +49,9 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 )
 
-ROOT_URLCONF = 'ban2stats_v2.urls'
+ROOT_URLCONF = 'ban2stats.urls'
 
-WSGI_APPLICATION = 'ban2stats_v2.wsgi.application'
+WSGI_APPLICATION = 'ban2stats.wsgi.application'
 
 
 # Database
