@@ -1,0 +1,5 @@
+{{ object.attacker_ip }}
+{{ object.protocol }}
+{{ object.port }}
+{{ object.country_code }}
+{{ object.geo_location }}

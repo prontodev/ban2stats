@@ -37,6 +37,7 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'attack',
+    'haystack',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -87,10 +88,20 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
+TEMPLATE_DIRS = (
+                    os.path.join(BASE_DIR, 'templates'),
+                )
+
 #GEO IP Settings
 GEOIP_PATH = os.path.join(BASE_DIR, '../geo_data')
 
 BAN2STATS_SERVICE_TOKEN = 'oTbCmV71i2Lg5wQMSsPEFKGJ0Banana'
+
+HAYSTACK_CONNECTIONS = {
+    'default': {
+        'ENGINE': 'haystack.backends.simple_backend.SimpleEngine',
+    },
+}
 
 try:
     from local import *
