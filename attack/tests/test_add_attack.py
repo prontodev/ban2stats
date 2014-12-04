@@ -43,7 +43,7 @@ class TestAttackAdd(TestCase):
         self.assertEqual(attacks_from_db.port, '81')
         self.assertEqual(attacks_from_db.country_code, u'US')
         self.assertEqual(attacks_from_db.geo_location, u'CA, United States')
-        self.assertEqual(attacks_from_db.latitude, u'37.4192008972')
-        self.assertEqual(attacks_from_db.longitude, u'-122.057403564')
+        self.assertAlmostEqual(attacks_from_db.latitude, 37.4192008972)
+        self.assertAlmostEqual(attacks_from_db.longitude, -122.057403564)
 
         self.assertContains(response, 'Added attack')
