@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Ban2Stats</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/c3.css" rel="stylesheet">
+    <link href="css/custom.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <style>
+    body {
+        padding-top: 50px;
+        /* Required padding for .navbar-fixed-top. Remove if using .navbar-static-top. Change if height of navigation changes. */
+    }
+    .navbar {
+        margin-bottom: 0px;
+    }
+    .huge {
+        font-size: 70px;
+    }
+    .m-t-40 {
+        margin-top: 40px;
+    }
+    .footer {
+        padding:20px 0;
+        background-color: #f9f9f9;
+    }
+      #map {
+        width: 100%;
+        height: 400px;
+      }
+    </style>
+</head>
+
+<body>
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+        <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#">Ban2Stats</a>
+            </div>
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav">
+                    <li>
+                        <a href="#">About</a>
+                    </li>
+                    <li>
+                        <a href="#">Services</a>
+                    </li>
+                    <li>
+                        <a href="#">Contact</a>
+                    </li>
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container -->
+    </nav>
+
+    <!-- Page Content -->
+    <div id="map"></div>
+    <div class="container">
+        <div class="row m-t-40">
+            <div class="col-md-4">
+                <h2>Blocked IPs</h2>
+                <p class="lead huge" id="blocked-ip-count"></p>
+            </div>
+            <div class="col-md-4">
+                <h2>Attacked Services</h2>
+                <div id="attacktypes"></div>
+            </div>
+            <div class="col-md-4">
+                <h2>Top Blocked Countries</h2>
+                <table class="table table-striped">
+                  <thead>
+                    <tr>
+                      <th>Country</th>
+                      <th>Blocked IPs</th>
+                    </tr>
+                  </thead>
+                  <tbody id="tbody-blocked-countries">
+
+                  </tbody>
+                </table>
+            </div>
+        </div>
+        <!-- /.row -->
+
+    </div>
+    <!-- /.container -->
+    <footer>
+       <div class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <p>Ban2Stats</p>
+                </div>
+            </div>
+        </div>
+        </div> 
+    </footer>
+    <!-- jQuery Version 1.11.0-->
+    <script src="js/jquery-1.11.0.js"></script> 
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/d3.min.js"></script>
+    <script src="js/c3.min.js"></script>
+
+
+    <script src="https://maps.googleapis.com/maps/api/js"></script>
+    <script>
+      var script = '<script type="text/javascript" src="./js/markerclusterer';
+      if (document.location.search.indexOf('compiled') !== -1) {
+        script += '_compiled';
+      }
+      script += '.js"><' + '/script>';
+      document.write(script);
+    </script>
+    <script type="text/javascript">
+        var chart;
+        var blocked_ip_count;
+        var blocked_countries;
+        var blocked_ips;
+        var attacked_services;
+        function render_attacked_services_diagram(attacked_services_data){
+            chart = c3.generate({
+            bindto: '#attacktypes',
+            data: {
+                columns: attacked_services_data,
+                type : 'donut'
+            },
+            donut: {
+                title: "Attack Services"
+            }
+          });
+        }
+        function render_blocked_countries(blocked_countries_data){
+
+            var tbody = $("#tbody-blocked-countries");
+            var each_country_html;
+            $.each(blocked_countries_data, function(index, item){
+                each_country_html = "<tr><td>"+ item.country_name + "</td><td class='text-right'>" + item.count +"</td></tr>"
+                tbody.append($(each_country_html));
+            })
+        }
+        function build_info_window(marker, blocked_ip_data){
+            var html = blocked_ip_data[2] + "<br/>" ;
+
+            $.each(blocked_ip_data[3], function(index, each_attack){
+                html += "<b>"+each_attack[1] + " Attack</b>" +
+                    "<br/> " + each_attack[0] +
+                    "<br/>Last seen: " + each_attack[3] +
+                    "<br/> Ban count: " + each_attack[2] + "<br/>" ;
+
+
+
+                });
+
+            var infowindow = new google.maps.InfoWindow({
+              content: html
+            });
+            google.maps.event.addListener(marker, 'click', function(event){
+              infowindow.open(map, marker);
+              if((oldinfowindow!=null) && (oldinfowindow!=infowindow))
+                  { oldinfowindow.close(); }
+              oldinfowindow=infowindow;
+            });
+        }
+
+        var map;
+        var markers = [];
+        var markerClusterOptions = {
+          gridSize: 80, maxZoom: 15
+        };
+        var oldinfowindow=null;
+
+        function render_blocked_ips(){
+            var ip_counter = 0;
+            $.each(blocked_ips, function(index, each_pin) {
+                $.each(each_pin[3], function(index2, each_ip){
+                    ip_counter = ip_counter + 1;
+                    var latLng = new google.maps.LatLng(each_pin[0], each_pin[1]);
+                    var marker = new google.maps.Marker({position: latLng});
+                    markers.push(marker);
+                    build_info_window(marker, each_pin);
+                });
+
+            });
+            blocked_ip_count = ip_counter;
+            $("#blocked-ip-count").html(blocked_ip_count);
+            var markerCluster = new MarkerClusterer(map, markers, markerClusterOptions);
+        }
+        function initialize() {
+            $.getJSON( "http://localhost:8000/stats/blocked_countries/", function( data ) {
+              blocked_countries = data;
+              render_blocked_countries(blocked_countries);
+            });
+            $.getJSON( "http://localhost:8000/stats/attacked_services/", function( data ) {
+              attacked_services = data;
+              render_attacked_services_diagram(attacked_services);
+            });
+            $.getJSON( "http://localhost:8000/stats/blocked_ips/", function( data ) {
+              blocked_ips = data;
+              render_blocked_ips(data);
+
+            });
+            var center = new google.maps.LatLng(25,0);
+            map = new google.maps.Map(document.getElementById('map'), {
+              zoom: 2,
+              center: center,
+              mapTypeId: google.maps.MapTypeId.ROADMAP
+            });
+        } //initialize
+
+      google.maps.event.addDomListener(window, 'load', initialize);
+    </script>
+
+
+</body>
+</html>
