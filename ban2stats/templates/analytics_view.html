@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+</head>
+<body>
+    <h2>IP count</h2>
+    <div>
+        <dl><dt>Ip count</dt></dl>
+        <dd>{{ip_count}}</dd>
+    </div>
+    <!-- Begin faceting. -->
+    <h2>Attacked Service</h2>
+
+    <div>
+        <dl>
+            {% if attacked_service_facet.fields.attacked_service %}
+                <dt>Service</dt>
+                {% for service in attacked_service_facet.fields.attacked_service %}
+                    <dd>{{ service.0 }} ({{ service.1 }})</dd>
+                {% endfor %}
+            {% else %}
+                <p>No attacked service facets.</p>
+            {% endif %}
+        </dl>
+    </div>
+    <!-- End faceting -->
+
+
+    <!-- Begin faceting. -->
+    <h2>Top 5 Countries</h2>
+
+    <div>
+        <dl>
+            {% if country_code_facet.fields.country_code|slice:":5" %}
+                <dt>Country</dt>
+                {% for country in country_code_facet.fields.country_code %}
+                    <dd>{{ country.0 }} ({{ country.1 }})</dd>
+                {% endfor %}
+            {% else %}
+                <p>No country facets.</p>
+            {% endif %}
+        </dl>
+    </div>
+    <!-- End faceting -->
+
+</body>
+</html>

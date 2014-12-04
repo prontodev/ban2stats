@@ -99,7 +99,9 @@ BAN2STATS_SERVICE_TOKEN = 'oTbCmV71i2Lg5wQMSsPEFKGJ0Banana'
 
 HAYSTACK_CONNECTIONS = {
     'default': {
-        'ENGINE': 'haystack.backends.simple_backend.SimpleEngine',
+        'ENGINE': 'haystack.backends.elasticsearch_backend.ElasticsearchSearchEngine',
+        'URL': 'http://127.0.0.1:9200/',
+        'INDEX_NAME': 'haystack',
     },
 }
 
