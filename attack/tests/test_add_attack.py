@@ -41,7 +41,7 @@ class TestAttackAdd(TestCase):
         attacks_from_db = Attack.objects.get(attacker_ip='72.14.207.99', port='81')
         self.assertEqual(attacks_from_db.service_name, 'company web server test view')
         self.assertEqual(attacks_from_db.port, '81')
-        self.assertEqual(attacks_from_db.country_code, u'US')
+        self.assertEqual(attacks_from_db.country_name, u'United States')
         self.assertEqual(attacks_from_db.geo_location, u'CA, United States')
         self.assertAlmostEqual(attacks_from_db.latitude, 37.4192008972)
         self.assertAlmostEqual(attacks_from_db.longitude, -122.057403564)

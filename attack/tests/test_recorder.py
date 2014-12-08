@@ -11,7 +11,7 @@ class TestRecorder(TestCase):
     def test_get_geo_data(self):
         ip = '72.14.207.99'
         geo_details = self.attack_recorder.get_geo_data(ip=ip)
-        self.assertEqual(self.attack_recorder.data['country_code'], u'US')
+        self.assertEqual(self.attack_recorder.data['country_name'], u'United States')
         self.assertEqual(self.attack_recorder.data['geo_location'], u'CA, United States')
 
     def test_get_geo_data_invalid_ip(self):
@@ -32,7 +32,7 @@ class TestRecorder(TestCase):
         self.attack_recorder.stamp_time()
         saved_attack = self.attack_recorder.save()
         self.assertEqual(saved_attack.service_name, 'company web server')
-        self.assertEqual(saved_attack.country_code, 'US')
+        self.assertEqual(saved_attack.country_name, 'United States')
 
     def test_set_data_with_empty_values(self):
         self.assertRaisesMessage(ValueError, 'Required attacker_ip, service_name, protocol and port.', self.attack_recorder.set_data)

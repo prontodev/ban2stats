@@ -12,7 +12,7 @@ class Attack(models.Model):
 
     latitude = models.FloatField()
     longitude = models.FloatField()
-    country_code = models.CharField(max_length=3)
+    country_name = models.CharField(max_length=255)
     geo_location = models.CharField(max_length=140)
     timestamp = models.DateTimeField()
 

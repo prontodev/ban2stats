@@ -39,7 +39,7 @@ class AttackRecorder(object):
         self.data['timestamp'] = now_timestamp
 
     def save(self):
-        self.data.pop('country_name')
+        self.data.pop('country_code')
         attack = Attack(**self.data)
         attack.save()
         return attack
