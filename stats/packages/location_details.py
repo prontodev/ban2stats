@@ -1,0 +1,2 @@
+class LocationDetailsPackageBuilder(object):
+    pass

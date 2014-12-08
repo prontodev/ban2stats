@@ -5,4 +5,5 @@ urlpatterns = patterns('',
     url(r'^blocked_countries/$', 'stats.views.get_blocked_countries', name='get_blocked_countries'),
     # url(r'^blocked_ips/$', 'stats.views.get_blocked_ips', name='get_blocked_ips'),
     url(r'^blocked_locations/$', 'stats.views.get_block_locations', name='get_blocked_locations'),
+    url(r'^location_details/$', 'stats.views.get_location_details', name='get_location_details'),
 )
