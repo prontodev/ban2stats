@@ -31,9 +31,6 @@ class TestBlockedIPPackageMinimized(TestCase):
         self.assertEqual(content, expected_content)
 
     def test_render_all_objects(self):
-        content = self.builder.render_all_objects()
-        self.assertIn('{', content)
-        self.assertIn('"country_name": "Morocco"', content)
-        self.assertIn('"count": "1,123"', content)
-        self.assertIn('}', content)
-        self.assertNotEqual(',', content[-1])
+        content = self.builder.render_all_objects_as_list()
+        expected_content = '''[\n["37.4192008972","-122.057403564",1]\n]'''
+        self.assertEqual(content, expected_content)
