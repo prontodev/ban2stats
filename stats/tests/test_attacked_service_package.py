@@ -1,5 +1,4 @@
 from django.test import TestCase
-from django.conf import settings
 from attack.models import Attack
 from stats.packages.attacked_service import AttackedServicePackageBuilder
 from django.core.management import call_command
