@@ -59,9 +59,7 @@ class TestGetAttackedServiceStats(TestCase):
         self.assertEqual(content, u'["Internal Wordpress System", 1]')
 
     def test_render_all_objects(self):
-        print  'f'
         content = self.attacked_services.render_all_objects()
-        print content
         expected_content = u'''["Internal Wordpress System", 1123]'''
         self.assertIn(expected_content, content)
         expected_content = u'''["Mail Server", 3]'''
