@@ -162,29 +162,33 @@
                 tbody.append($(each_country_html));
             })
         }
-//        function build_info_window(marker, blocked_ip_data){
-//            var html = blocked_ip_data[2] + "<br/>" ;
-//
-//            $.each(blocked_ip_data[3], function(index, each_attack){
-//                html += "<b>"+each_attack[1] + " Attack</b>" +
-//                    "<br/> " + each_attack[0] +
-//                    "<br/>Last seen: " + each_attack[3] +
-//                    "<br/> Ban count: " + each_attack[2] + "<br/>" ;
-//
-//
-//
-//                });
-//
-//            var infowindow = new google.maps.InfoWindow({
-//              content: html
-//            });
-//            google.maps.event.addListener(marker, 'click', function(event){
-//              infowindow.open(map, marker);
-//              if((oldinfowindow!=null) && (oldinfowindow!=infowindow))
-//                  { oldinfowindow.close(); }
-//              oldinfowindow=infowindow;
-//            });
-//        }
+        function build_info_window(marker, location_data){
+
+            var html = "" ;
+            google.maps.event.addListener(marker, 'click', function(event){
+              $.ajax({
+                 dataType: "json",
+                 url: "http://localhost:8000/stats/location_details/",
+                 data: {'latitude': location_data[0], 'longitude': location_data[1]},
+                 success: function( data_per_location ) {
+                     html = '' ;
+                     $.each(data_per_location, function(index, each_ip){
+                        html += "<b>"+each_ip.service_name + " Attack</b>" +
+                            "<br/> " + each_ip.ip +
+                            "<br/>Last seen: " + each_ip.last_seen  +
+                            "<br/> Ban count: " + each_ip.ban_count + "<br/>" ;
+                     });
+                     var infowindow = new google.maps.InfoWindow({
+                        content: html
+                     });
+                     infowindow.open(map, marker);
+                     if((oldinfowindow!=null) && (oldinfowindow!=infowindow))
+                          { oldinfowindow.close(); }
+                      oldinfowindow=infowindow;
+                 }//success
+              });//ajax
+            });//map click
+        }//build info window
 
         var map;
         var markers = [];
@@ -202,7 +206,7 @@
                     var latLng = new google.maps.LatLng(each_pin[0], each_pin[1]);
                     var marker = new google.maps.Marker({position: latLng});
                     markers.push(marker);
-//                    build_info_window(marker, each_pin);
+                    build_info_window(marker, each_pin);
                 };
 
             });
