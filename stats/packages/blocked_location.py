@@ -27,13 +27,6 @@ class BlockedLocationPackageBuilderMinimized(PackageBuilder):
         output_string = template.format(**data)
         return output_string
 
-    def render_each_attack_details(self, each_attack_details_as_dict):
-        output_string = '''["{ip}","{service_name}",{count},"{last_seen}"]'''.format(**each_attack_details_as_dict)
-        return output_string
-
-    def objects_count_as_string(self, number):
-        return "{:,}".format(number)
-
     def render_as_javascript(self):
         template = """
         "blocked_ips": {0},\n

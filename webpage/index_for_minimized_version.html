@@ -139,7 +139,7 @@
         var chart;
         var blocked_ip_count;
         var blocked_countries;
-        var blocked_ips;
+        var blocked_locations;
         var attacked_services;
         function render_attacked_services_diagram(attacked_services_data){
             chart = c3.generate({
@@ -162,29 +162,29 @@
                 tbody.append($(each_country_html));
             })
         }
-        function build_info_window(marker, blocked_ip_data){
-            var html = blocked_ip_data[2] + "<br/>" ;
-
-            $.each(blocked_ip_data[3], function(index, each_attack){
-                html += "<b>"+each_attack[1] + " Attack</b>" +
-                    "<br/> " + each_attack[0] +
-                    "<br/>Last seen: " + each_attack[3] +
-                    "<br/> Ban count: " + each_attack[2] + "<br/>" ;
-
-
-
-                });
-
-            var infowindow = new google.maps.InfoWindow({
-              content: html
-            });
-            google.maps.event.addListener(marker, 'click', function(event){
-              infowindow.open(map, marker);
-              if((oldinfowindow!=null) && (oldinfowindow!=infowindow))
-                  { oldinfowindow.close(); }
-              oldinfowindow=infowindow;
-            });
-        }
+//        function build_info_window(marker, blocked_ip_data){
+//            var html = blocked_ip_data[2] + "<br/>" ;
+//
+//            $.each(blocked_ip_data[3], function(index, each_attack){
+//                html += "<b>"+each_attack[1] + " Attack</b>" +
+//                    "<br/> " + each_attack[0] +
+//                    "<br/>Last seen: " + each_attack[3] +
+//                    "<br/> Ban count: " + each_attack[2] + "<br/>" ;
+//
+//
+//
+//                });
+//
+//            var infowindow = new google.maps.InfoWindow({
+//              content: html
+//            });
+//            google.maps.event.addListener(marker, 'click', function(event){
+//              infowindow.open(map, marker);
+//              if((oldinfowindow!=null) && (oldinfowindow!=infowindow))
+//                  { oldinfowindow.close(); }
+//              oldinfowindow=infowindow;
+//            });
+//        }
 
         var map;
         var markers = [];
@@ -193,16 +193,17 @@
         };
         var oldinfowindow=null;
 
-        function render_blocked_ips(){
+        function render_blocked_locations(){
             var ip_counter = 0;
-            $.each(blocked_ips, function(index, each_pin) {
-                $.each(each_pin[3], function(index2, each_ip){
+            $.each(blocked_locations, function(index, each_pin) {
+                each_blocked_count = each_pin[2]
+                for ( var i = 0; i < each_blocked_count; i++ ) {
                     ip_counter = ip_counter + 1;
                     var latLng = new google.maps.LatLng(each_pin[0], each_pin[1]);
                     var marker = new google.maps.Marker({position: latLng});
                     markers.push(marker);
-                    build_info_window(marker, each_pin);
-                });
+//                    build_info_window(marker, each_pin);
+                };
 
             });
             blocked_ip_count = ip_counter;
@@ -218,9 +219,9 @@
               attacked_services = data;
               render_attacked_services_diagram(attacked_services);
             });
-            $.getJSON( "http://localhost:8000/stats/blocked_ips/", function( data ) {
-              blocked_ips = data;
-              render_blocked_ips(data);
+            $.getJSON( "http://localhost:8000/stats/blocked_locations/", function( data ) {
+              blocked_locations = data;
+              render_blocked_locations(data);
 
             });
             var center = new google.maps.LatLng(25,0);
