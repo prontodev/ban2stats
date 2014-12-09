@@ -28,11 +28,12 @@ def get_block_locations(request):
 def get_location_details(request):
     # content = LocationDetailsPackageBuilder().render()
     content = """
-    [{
-    "service_name": "Wordpress Portal",
-    "ip" : "202.99.83.24",
-    "last_seen": "2014-10-22 04:53:06.533996+00:00",
-    "ban_count": 200
-    }]
+    [
+    ["Wordpress Portal",
+    "202.99.83.24",
+    "2014-10-22 04:53:06.533996+00:00",
+    200
+    ]
+    ]
     """
     return return_json_content(content)

@@ -173,10 +173,10 @@
                  success: function( data_per_location ) {
                      html = '' ;
                      $.each(data_per_location, function(index, each_ip){
-                        html += "<b>"+each_ip.service_name + " Attack</b>" +
-                            "<br/> " + each_ip.ip +
-                            "<br/>Last seen: " + each_ip.last_seen  +
-                            "<br/> Ban count: " + each_ip.ban_count + "<br/>" ;
+                        html += "<b>"+each_ip[0] + " Attack</b>" +
+                            "<br/> " + each_ip[1] +
+                            "<br/>Last seen: " + each_ip[2]  +
+                            "<br/> Ban count: " + each_ip[3] + "<br/>" ;
                      });
                      var infowindow = new google.maps.InfoWindow({
                         content: html
