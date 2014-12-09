@@ -4,3 +4,4 @@ django-haystack
 elasticsearch
 dateutils
 geopy
+httplib2
