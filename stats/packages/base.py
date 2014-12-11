@@ -6,6 +6,7 @@ class PackageBuilder(object):
             all_objects = self.get_objects()
         for each_object in all_objects:
             all_rendered_object.append(self.render_each_object(each_object))
+        print all_rendered_object
         return ",\n".join(all_rendered_object)
 
     def render_all_objects_as_list(self):

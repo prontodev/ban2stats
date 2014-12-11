@@ -61,7 +61,7 @@ class TestBlockedIPPackageMinimized(TestCase):
         expected_content = '''["Internal Wordpress System","72.14.207.99","2014-11-18T12:58:56",2]'''
         self.assertEqual(content, expected_content)
 
-    def test_render_all_objects(self):
+    def test_render_all_objects_as_list(self):
         content = self.builder.render_all_objects_as_list()
         self.assertIn('''[\n[''', content)
         self.assertIn(''']\n]''', content)

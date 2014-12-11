@@ -10,7 +10,7 @@ class LocationDetailsPackageBuilder(PackageBuilder):
         self.latitude = latitude
 
     def get_objects(self):
-        location = Point(self.longitude, self.latitude)
+        location = Point(float(self.longitude), float(self.latitude))
         objects = SearchQuerySet().within('location', location, location).facet('ip').facet_counts()
         return objects['fields']['ip']
 

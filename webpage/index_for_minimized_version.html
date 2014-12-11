@@ -173,6 +173,8 @@
                  success: function( data_per_location ) {
                      html = '' ;
                      $.each(data_per_location, function(index, each_ip){
+                        console.log('each_ip');
+                         console.log(each_ip);
                         html += "<b>"+each_ip[0] + " Attack</b>" +
                             "<br/> " + each_ip[1] +
                             "<br/>Last seen: " + each_ip[2]  +
@@ -200,9 +202,9 @@
         function render_blocked_locations(){
             var ip_counter = 0;
             $.each(blocked_locations, function(index, each_pin) {
+                ip_counter = ip_counter + 1;
                 each_blocked_count = each_pin[2]
                 for ( var i = 0; i < each_blocked_count; i++ ) {
-                    ip_counter = ip_counter + 1;
                     var latLng = new google.maps.LatLng(each_pin[0], each_pin[1]);
                     var marker = new google.maps.Marker({position: latLng});
                     markers.push(marker);
