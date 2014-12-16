@@ -162,6 +162,10 @@
                 tbody.append($(each_country_html));
             })
         }
+        function render_blocked_ip_count(count_data){
+            $("#blocked-ip-count").html(count_data.count);
+        }
+
         function build_info_window(marker, location_data){
 
             var html = "" ;
@@ -212,8 +216,7 @@
                 };
 
             });
-            blocked_ip_count = ip_counter;
-            $("#blocked-ip-count").html(blocked_ip_count);
+
             var markerCluster = new MarkerClusterer(map, markers, markerClusterOptions);
         }
         function initialize() {
@@ -224,6 +227,12 @@
             $.getJSON( "http://localhost:8000/stats/attacked_services/", function( data ) {
               attacked_services = data;
               render_attacked_services_diagram(attacked_services);
+            });
+            $.getJSON( "http://localhost:8000/stats/blocked_ip_count/", function( data ) {
+              blocked_ip_count = data;
+              render_blocked_ip_count(blocked_ip_count);
+              console.log('yep');
+
             });
             $.getJSON( "http://localhost:8000/stats/blocked_locations/", function( data ) {
               blocked_locations = data;
