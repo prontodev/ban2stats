@@ -7,7 +7,7 @@ class BlockedCountryPackageBuilder(PackageBuilder):
 
     def get_objects(self):
         country_search_queryset = SearchQuerySet().facet('country_name', order='count')
-        countries = country_search_queryset.facet_counts()['fields']['country_name']
+        countries = country_search_queryset.facet_counts()['fields']['country_name'][:5]
         return countries
 
     def render_each_object(self, object):
