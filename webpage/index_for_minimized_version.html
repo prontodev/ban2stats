@@ -141,6 +141,7 @@
         var blocked_countries;
         var blocked_locations;
         var attacked_services;
+        var api_host = "http://172.19.30.217:8000";
         function render_attacked_services_diagram(attacked_services_data){
             chart = c3.generate({
             bindto: '#attacktypes',
@@ -172,7 +173,7 @@
             google.maps.event.addListener(marker, 'click', function(event){
               $.ajax({
                  dataType: "json",
-                 url: "http://localhost:8000/stats/location_details/",
+                 url:api_host + "/stats/location_details/",
                  data: {'latitude': location_data[0], 'longitude': location_data[1]},
                  success: function( data_per_location ) {
                      html = '' ;
@@ -218,19 +219,19 @@
             var markerCluster = new MarkerClusterer(map, markers, markerClusterOptions);
         }
         function initialize() {
-            $.getJSON( "http://localhost:8000/stats/blocked_ip_count/", function( data ) {
+            $.getJSON(api_host + "/stats/blocked_ip_count/", function( data ) {
               blocked_ip_count = data;
               render_blocked_ip_count(blocked_ip_count);
             });
-            $.getJSON( "http://localhost:8000/stats/blocked_countries/", function( data ) {
+            $.getJSON(api_host + "/stats/blocked_countries/", function( data ) {
               blocked_countries = data;
               render_blocked_countries(blocked_countries);
             });
-            $.getJSON( "http://localhost:8000/stats/attacked_services/", function( data ) {
+            $.getJSON(api_host + "/stats/attacked_services/", function( data ) {
               attacked_services = data;
               render_attacked_services_diagram(attacked_services);
             });
-            $.getJSON( "http://localhost:8000/stats/blocked_locations/", function( data ) {
+            $.getJSON(api_host + "/stats/blocked_locations/", function( data ) {
               blocked_locations = data;
               render_blocked_locations(data);
 
