@@ -1,7 +1,5 @@
 from stats.packages.base import PackageBuilder
 from haystack.query import SearchQuerySet
-from dateutil.parser import parse
-from django.contrib.gis.geos import Point
 
 
 class BlockedLocationPackageBuilderMinimized(PackageBuilder):
