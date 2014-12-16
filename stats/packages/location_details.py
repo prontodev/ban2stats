@@ -14,10 +14,6 @@ class LocationDetailsPackageBuilder(PackageBuilder):
         objects = SearchQuerySet().within('location', location, location).facet('ip').facet_counts()
         return objects['fields']['ip']
 
-    def get_count_of_ip(self, counts, ip):
-        count = filter( lambda x: x[0] == ip, counts['fields']['ip'])[0][1]
-        return count
-
     def render_each_object(self, each_object):
         template = '["{0}","{1}","{2}",{3}]'
         this_object = SearchQuerySet().filter(ip=each_object[0])

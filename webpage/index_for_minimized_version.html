@@ -177,8 +177,6 @@
                  success: function( data_per_location ) {
                      html = '' ;
                      $.each(data_per_location, function(index, each_ip){
-                        console.log('each_ip');
-                         console.log(each_ip);
                         html += "<b>"+each_ip[0] + " Attack</b>" +
                             "<br/> " + each_ip[1] +
                             "<br/>Last seen: " + each_ip[2]  +
