@@ -7,16 +7,16 @@ Stats for Fail2Ban (for relational database)
 
    See diagram at https://github.com/prontodev/ban2stats/blob/master/docs/Ban2Stats_diagram.pdf
 
-## Ban2Stats Web Service
+### Ban2Stats Web Service
    Ban2Stats Web Service is a Django web application and also use Haystack to connect with ElasticSearch.
 
-## Ban2Stats Web Page
+### Ban2Stats Web Page
    A static web page that display Statistics from Ban2Stats Web Service.
 
-## Ban2Stats Client
+### Ban2Stats Client
    is a Python script that makes HTTP Request to Ban2Stats web service API. The client is used by Fail2Ban hook.
 
-## ElasticSearch
+### ElasticSearch
    ElasticSearch is used to do search and indexing for Ban2Stats Web Service
 
 Installation
