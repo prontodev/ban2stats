@@ -1,15 +1,15 @@
-ban2stats_v2
+ban2stats
 ============
 
 Stats for Fail2Ban (for relational database)
 
 Overview
 --------
-#. ElasticSearch
+# ElasticSearch
    Run ElasticSearch
-#. Ban2Stats Web Service
+# Ban2Stats Web Service
    Run Ban2Stats
-#. Ban2Stats Web Page
+# Ban2Stats Web Page
 
 
 Installation
