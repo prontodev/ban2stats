@@ -21,16 +21,16 @@ Stats for Fail2Ban (for relational database)
    ElasticSearch is used to do search and indexing for Ban2Stats Web Service
 
 #Installation
-------------
+--------------
 
-###. Install following libraries::
+### Install following libraries::
 
     geos
     elasticsearch
     python
 
 
-###. Create an empty virtualenv and install more library using Pip::
+### Create an empty virtualenv and install more library using Pip::
 
     pip install -r ban2stats/ban2stats/setup/requirements.txt
 
@@ -50,21 +50,20 @@ Stats for Fail2Ban (for relational database)
     In ban2stats/webpage/index.html
     - api_host
 
-Run
----
+#Run
+------
 
-###. ElasticSearch
+### ElasticSearch
    Run ElasticSearch
 
-###. Ban2Stats Web Service
+### Ban2Stats Web Service
    Run Ban2Stats
-
-###. Ban2Stats Web Page
+### Ban2Stats Web Page
    You can run this using any static web server.
 
    if you want to run it using Python
 
-   python -m SimpleHTTPServer 80
+       python -m SimpleHTTPServer 80
 
 
 
