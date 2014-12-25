@@ -9,9 +9,10 @@ Stats for Fail2Ban (for relational database)
 
 ### Ban2Stats Web Service
    Ban2Stats Web Service is a Django web application and also use Haystack to connect with ElasticSearch.
+   It saves attack details to database and sends data to ElasticSearch.
 
 ### Ban2Stats Web Page
-   A static web page that display Statistics from Ban2Stats Web Service.
+   A static web page that display Statistics from Ban2Stats Web Service. In the HTML page contains Javascript that will make Ajax calls to Ban2Stats Web Service and then display content on the page.
 
 ### Ban2Stats Client
    is a Python script that makes HTTP Request to Ban2Stats web service API. The client is used by Fail2Ban hook.
@@ -19,23 +20,23 @@ Stats for Fail2Ban (for relational database)
 ### ElasticSearch
    ElasticSearch is used to do search and indexing for Ban2Stats Web Service
 
-Installation
+#Installation
 ------------
 
-#. Install following libraries::
+###. Install following libraries::
 
     geos
     elasticsearch
     python
 
 
-#. Create an empty virtualenv and install more library using Pip::
+###. Create an empty virtualenv and install more library using Pip::
 
     pip install -r ban2stats/ban2stats/setup/requirements.txt
 
 
-Configuration
--------------
+#Configuration
+--------------
 
     create local.py under ban2stats/ban2stats/settings/
     - database configuration
@@ -52,13 +53,13 @@ Configuration
 Run
 ---
 
-#. ElasticSearch
+###. ElasticSearch
    Run ElasticSearch
 
-#. Ban2Stats Web Service
+###. Ban2Stats Web Service
    Run Ban2Stats
 
-#. Ban2Stats Web Page
+###. Ban2Stats Web Page
    You can run this using any static web server.
 
    if you want to run it using Python
