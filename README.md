@@ -24,7 +24,6 @@ Stats for Fail2Ban (for relational database)
 --------------
 
 ### Install following libraries::
-
     geos
     elasticsearch
     python
@@ -39,15 +38,18 @@ Stats for Fail2Ban (for relational database)
 --------------
 
     create local.py under ban2stats/ban2stats/settings/
+
     - database configuration
     - ElasticSearch configuration (HAYSTACK_CONNECTIONS)
     - BAN2STATS_SERVICE_TOKEN (should match with client's TOKEN)
 
     In ban2stats/client/webservice_client.py
+
     - WEBSERVICE_HOST
     - TOKEN (should match with Banstats's BAN2STATS_SERVICE_TOKEN in settings)
 
     In ban2stats/webpage/index.html
+
     - api_host
 
 #Run
