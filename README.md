@@ -20,7 +20,7 @@ Stats for Fail2Ban (for relational database)
 ### ElasticSearch
    ElasticSearch is used to do search and indexing for Ban2Stats Web Service
 
-#Installation
+#Dependencies
 
 ### Install following libraries::
 * geos
@@ -35,11 +35,24 @@ Stats for Fail2Ban (for relational database)
 
 #Configuration
 
-create local.py under ban2stats/ban2stats/settings/
+Create local.py under ban2stats/ban2stats/settings/
 
 * database configuration
 * ElasticSearch configuration (HAYSTACK_CONNECTIONS)
 * BAN2STATS_SERVICE_TOKEN (should match with client's TOKEN)
+
+#Installation
+
+For the first time, run follow command to create index for ElasticSearch
+
+    python manage.py rebuild_index
+
+
+To update index for ElasticSearch (more details on Haystack):
+
+    python manage.py update_index
+
+And please setup your system cron job to update index (For example for every 10 min):
 
 
 In ban2stats/client/webservice_client.py
@@ -51,6 +64,7 @@ In ban2stats/client/webservice_client.py
 In ban2stats/webpage/index.html
 
 * api_host
+
 
 #Run
 
