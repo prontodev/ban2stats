@@ -24,9 +24,9 @@ Stats for Fail2Ban (for relational database)
 --------------
 
 ### Install following libraries::
-    * geos
-    * elasticsearch
-    * python
+* geos
+* elasticsearch
+* python
 
 
 ### Create an empty virtualenv and install more library using Pip::
