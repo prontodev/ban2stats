@@ -24,9 +24,9 @@ Stats for Fail2Ban (for relational database)
 --------------
 
 ### Install following libraries::
-    geos
-    elasticsearch
-    python
+    * geos
+    * elasticsearch
+    * python
 
 
 ### Create an empty virtualenv and install more library using Pip::
@@ -39,27 +39,32 @@ Stats for Fail2Ban (for relational database)
 
     create local.py under ban2stats/ban2stats/settings/
 
-    - database configuration
-    - ElasticSearch configuration (HAYSTACK_CONNECTIONS)
-    - BAN2STATS_SERVICE_TOKEN (should match with client's TOKEN)
+    * database configuration
+    * ElasticSearch configuration (HAYSTACK_CONNECTIONS)
+    * BAN2STATS_SERVICE_TOKEN (should match with client's TOKEN)
 
     In ban2stats/client/webservice_client.py
 
-    - WEBSERVICE_HOST
-    - TOKEN (should match with Banstats's BAN2STATS_SERVICE_TOKEN in settings)
+    * WEBSERVICE_HOST
+    * TOKEN (should match with Banstats's BAN2STATS_SERVICE_TOKEN in settings)
 
     In ban2stats/webpage/index.html
 
-    - api_host
+    * api_host
 
 #Run
 ------
 
 ### ElasticSearch
-   Run ElasticSearch
+   See ElasticSearch documentation.
 
 ### Ban2Stats Web Service
-   Run Ban2Stats
+   Ban2Stats Web Service is a Django web application. Please see Django document on how to setup production server.
+   To run development server run:
+
+   python manage.py runserver
+
+
 ### Ban2Stats Web Page
    You can run this using any static web server.
 
