@@ -43,7 +43,8 @@ Create local.py under ban2stats/ban2stats/settings/
 
 #Installation
 
-For the first time, run follow command to create index for ElasticSearch
+To work with indexing, Ban2Stats Web Service will feed data to ElasticSearch.
+For the first time, run follow command to create index for ElasticSearch at Ban2Stats Web Service.
 
     python manage.py rebuild_index
 
