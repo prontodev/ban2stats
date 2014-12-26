@@ -22,16 +22,18 @@ Stats for Fail2Ban (for relational database)
 
 #Dependencies
 
-### Install following libraries::
+### Install following libraries
 * geos
 * elasticsearch
 * python
 
-
-### Create an empty virtualenv and install more library using Pip::
+### For Ban2Stats Web Service, Create an empty virtualenv and install more library using Pip::
 
     pip install -r ban2stats/ban2stats/setup/requirements.txt
 
+### For Ban2Stats Client
+
+    pip install -r ban2stats/client/requirements.txt
 
 #Configuration
 
